@@ -17,14 +17,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HelgaRoosh/ahj-pb-homework-2_gnome.git"
+    "url": "git+https://github.com/HelgaRoosh/-ahj-pb-homework-3_gnome-.git.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/HelgaRoosh/ahj-pb-homework-2_gnome/issues"
+    "url": "https://github.com/HelgaRoosh/-ahj-pb-homework-3_gnome-/issues"
   },
-  "homepage": "https://github.com/HelgaRoosh/ahj-pb-homework-2_gnome#readme",
+  "homepage": "https://github.com/HelgaRoosh/-ahj-pb-homework-3_gnome-#readme",
   "devDependencies": {
     "@babel/cli": "^7.18.10",
     "@babel/core": "^7.19.1",
