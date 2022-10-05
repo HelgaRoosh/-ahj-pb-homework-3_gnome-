@@ -1,19 +1,22 @@
 // window.addEventListener('load', startGame);
-document.body.style.overflow = 'hidden';// на случай изменение количества по высоте
+// document.body.style.overflow = 'hidden';// на случай изменение количества по высоте
 
 export default class GameManager {
   constructor() {
     this.amountLines = 4;// можно менять, но не решена проблема высоты элементов,
     this.amountСolumns = 4; // они могут не влезть в окно
-    this.newGame = null;
+
     this.indexGoblin = null;
     this.interval = 1000;
     this.board = document.querySelector('.board');
     this.elements = [];
+
+    this.countShow = 0;
   }
 
   startGame() {
     this.createItemBoard(this.board); // прорисовали поле
+    this.countShow = 0;
     this.generateGoblin(); // создали гоблина
     this.intervalGenerateGoblin(this.interval); // меняем положение гоблина каждую секунду
   }
@@ -54,6 +57,7 @@ export default class GameManager {
     setInterval(() => {
       this.clearAll();
       this.generateGoblin();
+      this.countShow += 1;
     }, interval);
   }
 }
