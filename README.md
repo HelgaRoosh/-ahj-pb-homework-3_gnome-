@@ -2,6 +2,8 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/25g3xs35jex6v461?svg=true)](https://ci.appveyor.com/project/HelgaRoosh/ahj-pb-homework-3-gnome)
 
+ https://helgaroosh.github.io/-ahj-pb-homework-3_gnome-/
+
 
 # Домашнее задание к занятию "3.Обработка событий"
 

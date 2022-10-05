@@ -1,4 +1,5 @@
 import './js/app';
-import './js/game_manager';
+import './js/gameManager';
+import './js/eventsManager';
 
 import './css/styles.css';
