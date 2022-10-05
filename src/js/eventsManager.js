@@ -1,5 +1,3 @@
-import GameManager from "./gameManager";
-
 export default class EventsManager {
   constructor(gameManager) {
     this.gameManager = gameManager;
@@ -8,7 +6,7 @@ export default class EventsManager {
 
   init() {
     this.gameManager.startGame();
-    
+
     // this.addOnCellClickListner();
   }
 }
