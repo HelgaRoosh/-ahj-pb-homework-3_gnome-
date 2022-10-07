@@ -7,24 +7,21 @@ export default class EventsManager {
     this.wins = document.querySelector('.wins'); // сообщ вы победили
     this.modal = document.querySelector('.modal');
 
-    this.countWins = 0;
-    this.countMiss = 0;
-    this.countShow = this.gameManager.countShow;
+    this.countWins = 0; // счетчик попаданий
+    this.countMiss = 0; // счетчик промахов
 
-    this.containerWins = document.querySelector('.control_wins span');
+    this.countShow = this.gameManager.countShow; // счетчик поялений(пришел из генерации)
+    this.eventShow = null;
+
+    this.containerWins = document.querySelector('.control_wins span'); // счетчик на экране
     this.containerMiss = document.querySelector('.control_miss span');
-    // this.containerShow = document.querySelector('.control_show  span');
-
-    // this.intGob = this.gameManager.intervalGenerateGoblin(this.interval);
   }
 
   init() { // стартовать игру
     this.gameManager.startGame();
     this.clickItem(); // следим за кликами
-
-    // this.eventShowGoblin(); // считаем появления гоблина
-    this.button.addEventListener('click', this.onClickNewGame());
-    // событие кнопки работает, но только сбрасывает счетчики
+    this.eventShowGoblin(this.gameManager.interval); // считаем появления гоблина
+    this.button.addEventListener('click', this.onClickNewGame());// следим за кнопкой(пока скрыта)
   }
 
   clickItem() { // проверяет попал или нет
@@ -33,41 +30,34 @@ export default class EventsManager {
       field[i].addEventListener('click', () => { // следим за кликами по ячейкам
         if (field[i].classList.contains('goblin')) { // если в ячейке стоял гоблин
           this.countWins += 1; // добавить в очкам попадания
-          this.containerWins.textContent = this.countWins;// !! изменить счетчик на экране
+          this.containerWins.textContent = this.countWins;// изменить счетчик на экране
           field[i].className = 'board-item';
         } else { // гоблина не было
           this.countMiss += 1; // добавить к промахам
-          this.containerMiss.textContent = this.countMiss;// !! изменить счетчик на экране
+          this.containerMiss.textContent = this.countMiss;// изменить счетчик на экране
         }
-        this.countsControl(this.countShow, this.countMiss, this.countWins);
+        this.countsControl(this.gameManager.countShow, this.countMiss, this.countWins);
         // контроль счетчиков после каждого клика
       });
     }
   }
 
-  // eventShowGoblin() {
-  // this.intGob.addEventListener('call', () => {
-  // this.countShow += 1;
-  // this.containerShow.textContent = this.countShow;
-  // this.countsControl(this.countShow, this.countMiss, this.countWins);
-  // });
-  // если была вызвана intervalGenerateGoblin(interval) то  this.countShow += 1;
-
-  // контроль счетчиков после каждого вызова
-  // }
+  eventShowGoblin(interval) {
+    this.eventShow = setInterval(() => {
+      this.countsControl(this.gameManager.countShow, this.countMiss, this.countWins);
+    }, interval);
+  }
 
   showModal() { // показывает всплывающее окно
     this.modal.classList.remove('hidden');
-    this.button.classList.remove('hidden');// показываем кнопк
-
+    this.button.classList.remove('hidden');// показываем кнопку
     this.gameManager.stopGenerateGoblin();// перестаем генерить гоблина
+    clearInterval(this.eventShow);// перестаем проверять появления
   }
 
   closeModal() { // скрываем все элементы всплывающего окна
     this.modal.classList.add('hidden');
-
     this.button.classList.add('hidden');
-
     if (!this.miss.classList.contains('hidden')) {
       this.miss.classList.add('hidden');
     }
@@ -87,7 +77,7 @@ export default class EventsManager {
   }
 
   countsControl(countShow, countMiss, countWins) { // контроль счетчиков
-    if ((countShow - countWins) > 5 || countMiss >= 5) {
+    if ((countShow - countWins) >= 5 || countMiss >= 5) {
       this.showModal(); // показываем всплывающее окно
       this.miss.classList.remove('hidden');// показываем вы проиграли
     }
@@ -97,7 +87,7 @@ export default class EventsManager {
     }
   }
 
-  resetCounts() {
+  resetCounts() {// обнуляем все счетчики
     this.countMiss = 0;
     this.countWins = 0;
     this.gameManager.countShow = 0;
