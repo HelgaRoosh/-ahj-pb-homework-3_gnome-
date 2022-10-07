@@ -87,7 +87,7 @@ export default class EventsManager {
     }
   }
 
-  resetCounts() {// обнуляем все счетчики
+  resetCounts() { // обнуляем все счетчики
     this.countMiss = 0;
     this.countWins = 0;
     this.gameManager.countShow = 0;
