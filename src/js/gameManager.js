@@ -38,7 +38,9 @@ export default class GameManager {
   }
 
   clearBoard() {
-    this.elements = [];
+    while (this.board.lastElementChild) {
+      this.board.removeChild(this.board.lastElementChild);
+    }
   }
 
   clearAll() { // убирает класс гоблин там где он есть
