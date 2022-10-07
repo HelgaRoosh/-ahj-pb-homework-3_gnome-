@@ -7,16 +7,19 @@ export default class GameManager {
     this.amountСolumns = 4; // они могут не влезть в окно
 
     this.indexGoblin = null;
+
     this.interval = 1000;
+    this.timetId = null;
+
     this.board = document.querySelector('.board');
     this.elements = [];
 
     this.countShow = 0;
+    this.containerShow = document.querySelector('.control_show span');
   }
 
   startGame() {
     this.createItemBoard(this.board); // прорисовали поле
-    this.countShow = 0;
     this.generateGoblin(); // создали гоблина
     this.intervalGenerateGoblin(this.interval); // меняем положение гоблина каждую секунду
   }
@@ -32,6 +35,10 @@ export default class GameManager {
       }
     }
     return board;
+  }
+
+  clearBoard() {
+    this.elements = [];
   }
 
   clearAll() { // убирает класс гоблин там где он есть
@@ -54,10 +61,16 @@ export default class GameManager {
   }
 
   intervalGenerateGoblin(interval) {
-    setInterval(() => {
+    this.timetId = setInterval(() => {
       this.clearAll();
       this.generateGoblin();
       this.countShow += 1;
+      this.containerShow.textContent = this.countShow;
     }, interval);
+  }
+
+  stopGenerateGoblin() {
+    clearInterval(this.timetId);
+    this.clearAll();
   }
 }
