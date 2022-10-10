@@ -72,6 +72,9 @@ export default class EventsManager {
       this.closeModal(); // закрыть всплывающее окно
       this.button.removeEventListener('click', this.onClickNewGame);
       this.gameManager.clearBoard();
+
+      this.gameManager.stopGenerateGoblin();// перестаем генерить гоблина
+      clearInterval(this.eventShow);// перестаем проверять появления
       this.init(); // стартовать игру
     });
   }
